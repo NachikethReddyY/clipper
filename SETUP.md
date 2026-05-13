@@ -1,4 +1,4 @@
-# Running Moonlit Flamingo
+# Running the Clipper (rebrand pending)
 
 Two ways to run it. **Docker is the easiest** — one command, everything included.
 
@@ -8,11 +8,11 @@ Two ways to run it. **Docker is the easiest** — one command, everything includ
 
 Starts MongoDB + the app together. No installs needed beyond Docker.
 
-**Prerequisites:** [Docker Desktop](https://www.docker.com/products/docker-desktop/) must be running.
+**Prerequisites:** Docker Desktop or OrbStack (Docker-compatible) must be running.
 
 ```bash
 cd /Users/nr/Developer/researchPaper
-docker-compose up --build
+docker compose up --build
 ```
 
 First run takes ~2 minutes to build. After that, open:
@@ -21,7 +21,7 @@ First run takes ~2 minutes to build. After that, open:
 http://localhost:7331
 ```
 
-To stop: `Ctrl+C`, then `docker-compose down`.
+To stop: `Ctrl+C`, then `docker compose down`.
 
 ---
 
@@ -93,11 +93,11 @@ Then go to `chrome://extensions/` and click the refresh icon on the Moonlit Flam
 
 ## Using it
 
-1. **Clip a page:** Visit any article → click the 🦩 icon → "Clip this page"  
-   Or: right-click anywhere → "Clip to Moonlit Flamingo"
+1. **Clip a page:** Visit any article → click the extension icon → "Clip this page"  
+   Or use the shortcut: `Alt+S`
 
-2. **Highlight:** Select any text on a clipped page → color toolbar appears → pick a color  
-   The highlight shows up live in `http://localhost:7331/article/[id]`
+2. **Highlight (no overlay UI):** Select text → press `Alt+H`  
+   This creates a yellow highlight and syncs it to the reader view.
 
 3. **Export for AI:** Open any article in the app → click "↓ Export MD" → paste into Claude
 
@@ -111,8 +111,9 @@ MongoDB is not running. Use Option A (Docker Compose) or start it manually (Opti
 **`Only plain objects can be passed to Client Components`**  
 Dates from MongoDB need serialization — run a `bun run build` restart to pick up the fix, or use Docker Compose which runs production mode.
 
-**Extension shows "App offline"**  
-The app isn't running or isn't on port 7331. Start it first, then reopen the popup.
+**Extension shows "Server not reachable" / "App offline"**  
+- Verify the server is up: `curl http://localhost:7331/api/health`
+- In the extension popup, set the Server URL to match your Docker/OrbStack published port (usually `http://localhost:7331`)
 
 **Port 7331 already in use**  
 ```bash

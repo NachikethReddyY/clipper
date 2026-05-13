@@ -80,17 +80,22 @@ function applyMarkToPage(h: { _id: string; anchor: { containerXPath: string; sta
 }
 
 // ─── Selection toolbar ────────────────────────────────────────────────────────
-document.addEventListener('mouseup', (e) => {
-  const sel = window.getSelection();
-  if (!sel || sel.isCollapsed || !sel.toString().trim()) { removeToolbar(); return; }
-  if ((e.target as Element).closest('#mf-toolbar')) return;
-  removeToolbar();
-  showToolbar(e.clientX, e.clientY, sel);
-});
+// Disabled by default — use keyboard shortcut `Alt+H` to highlight without UI overlays.
+// (Users requested no overlay when selecting text on pages.)
+const ENABLE_SELECTION_TOOLBAR = false;
+if (ENABLE_SELECTION_TOOLBAR) {
+  document.addEventListener('mouseup', (e) => {
+    const sel = window.getSelection();
+    if (!sel || sel.isCollapsed || !sel.toString().trim()) { removeToolbar(); return; }
+    if ((e.target as Element).closest('#mf-toolbar')) return;
+    removeToolbar();
+    showToolbar(e.clientX, e.clientY, sel);
+  });
 
-document.addEventListener('mousedown', (e) => {
-  if (!(e.target as Element).closest('#mf-toolbar')) removeToolbar();
-});
+  document.addEventListener('mousedown', (e) => {
+    if (!(e.target as Element).closest('#mf-toolbar')) removeToolbar();
+  });
+}
 
 function showToolbar(x: number, y: number, sel: Selection) {
   toolbar = document.createElement('div');
