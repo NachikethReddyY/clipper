@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 320px;
+      background: #0f0f0f;
+      color: #e8e8e8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+    }
+    #app { padding: 0; }
+    .header {
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid #2a2a2a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-size: 15px; font-weight: 700; color: #f97316; }
+    .status { font-size: 11px; display: flex; align-items: center; gap: 5px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; }
+    .dot.on { background: #4ade80; }
+    .dot.off { background: #ef4444; }
+    .body { padding: 12px 14px; }
+    .clip-btn {
+      width: 100%;
+      background: #f97316;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+      padding: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 12px;
+    }
+    .clip-btn:hover { background: #ea6c0a; }
+    .clip-btn:disabled { background: #333; color: #666; cursor: default; }
+    .section-title { font-size: 11px; color: #666; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .clip-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #e8e8e8;
+    }
+    .clip-item:hover { background: #1a1a1a; }
+    .clip-title { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .clip-site { font-size: 10px; color: #666; }
+    .open-app {
+      display: block;
+      text-align: center;
+      padding: 8px;
+      border-top: 1px solid #2a2a2a;
+      color: #666;
+      text-decoration: none;
+      font-size: 11px;
+    }
+    .open-app:hover { color: #f97316; }
+    .offline-msg { color: #666; font-size: 12px; text-align: center; padding: 12px 0; }
+    .status-badge {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: rgba(249,115,22,0.2);
+      color: #f97316;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="header">
+      <div class="logo">🦩 Moonlit</div>
+      <div class="status" id="status-area">
+        <div class="dot off" id="status-dot"></div>
+        <span id="status-text">Checking...</span>
+      </div>
+    </div>
+    <div class="body" id="body">
+      <div class="offline-msg">Loading...</div>
+    </div>
+    <a href="http://localhost:7331" target="_blank" class="open-app" id="open-app" style="display:none">
+      Open library ↗
+    </a>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

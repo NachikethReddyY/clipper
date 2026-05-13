@@ -1,0 +1,17 @@
+{
+  "name": "moonlit-flamingo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": ["apps/web", "extension"],
+  "scripts": {
+    "dev": "concurrently \"bun run dev:app\" \"bun run dev:ext\"",
+    "dev:app": "bun run --cwd apps/web dev",
+    "dev:ext": "bun run --cwd extension build:watch",
+    "build": "bun run --cwd apps/web build && bun run --cwd extension build",
+    "docker:up": "docker-compose up --build",
+    "docker:down": "docker-compose down"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "Moonlit Flamingo",
+  "version": "0.1.0",
+  "description": "Clip pages and highlight text. Syncs with your local research library.",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "alarms",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://localhost:7331/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "exclude_matches": ["http://localhost:7331/*"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Moonlit Flamingo"
+  },
+  "commands": {
+    "clip-page": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "mac": "Alt+S"
+      },
+      "description": "Clip current page to Moonlit Flamingo"
+    },
+    "highlight-selection": {
+      "suggested_key": {
+        "default": "Alt+H",
+        "mac": "Alt+H"
+      },
+      "description": "Highlight current selection in Moonlit Flamingo"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
